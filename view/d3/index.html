@@ -1,0 +1,22 @@
+<html>
+    <head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="http://d3js.org/d3.v3.min.js" language="JavaScript"></script>
+    <script src="../barstacker.js" language="JavaScript"></script>
+    </head>
+    <body>
+<div align="center" style="width: 600px;">
+    <svg id="stacker5" width="560" height="100" style="font-family: Helvetica;
+    font-weight: bold;" onclick="stacker5.update((Math.random()*100));"></svg>
+</div>
+    <script language="JavaScript">
+    var settings5 = barStackerDefaultSettings();
+    settings5.vertical = false;
+    settings5.valuePrefix = "";
+    settings5.valuePostfix="s"
+    settings5.color = "#337733";
+    var stacker5 = loadBarStacker("stacker5", "CPU_Time", 30, settings5);
+    </script>
+    </body>
+</html>

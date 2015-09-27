@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<!--<div class="cpu_util" data-bind="foreach:viewModel">-->
+    <!--<p>Cpu_Utilization:<span data-bind="text: CPU"></span></p>-->
+<!--</div>-->
+
+<!--<div class="memory" data-bind="foreach:viewModel">-->
+    <!--<p>Memory:<span data-bind="text: Memory"></span></p>-->
+<!--</div>-->
+
+<!--<div class="instances" data-bind="foreach:viewModel">-->
+    <!--<p>Instances<span data-bind="text: Instances"></span></p>-->
+<!--</div>-->
+
+<!--<div class="coompleteserverdata" data-bind="foreach:viewModel">-->
+    <!--<p>Uvic Edge:<span data-bind="text: CPU"></span></p>-->
+<!--</div>-->
+
+
+<div id="first">
+    <select data-bind="options: resourceListOptions, value: resourceData"></select>
+    <div id="second">
+        <select data-bind="options: testOptions, value: testData"></select>
+    </div>
+</div>
+
+<div data-bind="with: serverDataModel">
+    <p data-bind="text:message">
+    </p>
+</div>
+
+
+
+    <!--<div data-bind="foreach: viewModel">-->
+        <!--<p> ResourceId:<span data-bind="text: ResourceId"></span></p>-->
+        <!--<p>Cpu_UTLIZATION: <span data-bind="text: CPU"></span></p>-->
+    <!--</div>-->
+
+</body>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="../bootstrap.js" type="text/javascript" charset="utf-8"></script>
+<script src="http://knockoutjs.com/downloads/knockout-3.3.0.js"></script>
+<script src="../knockout.mapping-latest.debug.js"></script>
+<script src="data.js"></script>
+</html>
