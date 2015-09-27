@@ -16,6 +16,23 @@ function barStackerDefaultSettings(){
         valueAnimateTime: 1000
     };
 }
+var settings4 = barStackerDefaultSettings();
+settings4.barThickness = 1;
+settings4.barBoxPadding = 12;
+settings4.barPadding = 1;
+settings4.textPx = 30;
+settings4.maxValue = 110;
+settings4.color = "#0066FF";
+settings4.cornerRoundingX = 5;
+settings4.cornerRoundingY = 5;
+var stacker4 = loadBarStacker("stacker4", "Instances", 50, settings4);
+var settings5 = barStackerDefaultSettings();
+settings5.vertical = false;
+settings5.valuePrefix = "";
+settings5.maxValue = "1000"
+settings5.valuePostfix = "mb"
+settings5.color = "#FFFFFF";
+var stacker5 = loadBarStacker("stacker5", "CPU_Time", 30, settings5);
 function loadBarStacker(elementId, label, value, config) {
     if (config == null) config = barStackerDefaultSettings();
 
