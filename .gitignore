@@ -1,0 +1,8 @@
+.DS_Store
+.gitignore.swp
+.idea/workspace.xml
+node_modules/node-gyp/node_modules/npmlog/node_modules/gauge/README.md~
+node_modules/node-gyp/node_modules/npmlog/node_modules/gauge/node_modules/has-unicode/README.md~
+node_modules/nodemon/node_modules/update-notifier/node_modules/latest-version/node_modules/package-json/node_modules/got/node_modules/nested-error-stacks/README.md~
+public/.DS_Store
+view/.DS_Store
