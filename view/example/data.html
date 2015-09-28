@@ -23,17 +23,14 @@
 <!--</div>-->
 
 
-<div id="first">
-    <select data-bind="options: resourceListOptions, value: resourceData"></select>
-    <div id="second">
-        <select data-bind="options: testOptions, value: testData"></select>
-    </div>
-</div>
+<!--<div id="first">-->
+    <!--<select data-bind="options: resourceListOptions, value: resourceData"></select>-->
+    <!--<div id="second">-->
+        <!--<select data-bind="options: testOptions, value: testData"></select>-->
+    <!--</div>-->
+<!--</div>-->
 
-<div data-bind="with: serverDataModel">
-    <p data-bind="text:message">
-    </p>
-</div>
+
 
 
 
@@ -41,6 +38,21 @@
         <!--<p> ResourceId:<span data-bind="text: ResourceId"></span></p>-->
         <!--<p>Cpu_UTLIZATION: <span data-bind="text: CPU"></span></p>-->
     <!--</div>-->
+
+<select data-bind="options: resourceListOptions, value: resourceData"></select>
+
+<div data-bind="with: serverDataModel">
+    <p data-bind="text:message">
+    </p>
+</div>
+
+<div data-bind="with: d3Model">
+    <h3>Server Information</h3>
+    CPU:<p data-bind="text:cpu"></p>
+    CPU_UTIL:<p data-bind="text:cpuUtilData"></p>
+</div>
+
+
 
 </body>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>

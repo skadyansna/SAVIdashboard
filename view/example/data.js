@@ -1,5 +1,16 @@
-var resourceListOptions, resourceData, testData, testOptions, serverData, serverDataModel;
+var resourceListOptions, resourceData, testData, testOptions, serverData, serverDataModel, d3Model;
+
 var shouter = new ko.subscribable();
+
+var d3Model =  function() {
+    this.cpu = ko.observable("NA");
+    this.cpuUtilData = ko.observable("NA");
+    shouter.subscribe(function(newValue) {
+        console.log('D3 Model Refreshed');
+        this.cpu(Math.random() * 100);
+        this.cpuUtilData(Math.random() * 100);
+    }, this, "messageToPublish");
+};
 
 var serverDataModel = function () {
     this.message = ko.observable("This represents the server data.....");
@@ -17,17 +28,18 @@ var resourceListModel = function(resourceList) {
     resourceData = ko.observable();
     resourceData.subscribe(function(newValue) {
         shouter.notifySubscribers(newValue, "messageToPublish");
+        console.log('newValue');
     });
 };
 
-var testModel = function(resourceList) {
+/*var testModel = function(resourceList) {
     testOptions = ko.observableArray();
     var resourceListArray = Object.keys(resourceList).map(function (key) {return resourceList[key]});
     for(var resourceIndex in resourceListArray) {
         testOptions.push(resourceListArray[resourceIndex]);
     }
     testData = ko.observable();
-};
+};*/
 
 var getResourceIDData = function (resourceName) {
     console.log('Selected Value ' + resourceName);
@@ -35,19 +47,11 @@ var getResourceIDData = function (resourceName) {
 
 $.get('/resource', function(data) {
     ko.applyBindings(new masterVM(data));
-    resourceData.subscribe(function(selectedResource) {
-        getResourceIDData(selectedResource);
-    });
-
-    testData.subscribe(function(selectedResource) {
-        getResourceIDData(selectedResource);
-    });
-
 });
 
 var masterVM = function(data) {
-    resourceListModel =  new resourceListModel(data),
-    testModel = new testModel(data);
+    resourceListModel =  new resourceListModel(data);
     serverDataModel = new serverDataModel();
+    d3Model = new d3Model();
 };
 // This makes Knockout get to work

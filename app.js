@@ -24,44 +24,44 @@
 
 app.use(express.static(__dirname+'/view'));
 
-//var run_cmd=function(cmd, args, callBack ) {
-//    var spawn = require('child_process').spawn;
-//    var child = spawn(cmd, args);
-//    var resp = "";
-//    var resourceIDArray = [];
-//
-//    child.stdout.on('data', function (buffer) {
-//        resp += buffer.toString()
-//    });
-//    child.stdout.on('end', function(error) {
-//        var lines=resp.split('\n');
-//        for(var resourceID in lines) {
-//            resourceIDArray.push(lines[resourceID]);
-//        }
-//        callBack (resourceIDArray);
-//    });
-//}
-//function resource_Name(){
-//    run_cmd("sumit.sh", [], function (resourceIDArray) {
-//        for (var resourceID in resourceIDArray) {
-//            var dataSplit = resourceIDArray[resourceID].split('\n');
-//            if(dataSplit[0]) {
-//                resourceName[dataSplit[0].split(" ")[0]] = dataSplit[0].split(" ")[1] + '_' + dataSplit[0].split(" ")[0].split('-')[0];
-//                if (dataSplit[config.RESOURCE_ID] === '') {
-//                    return;
-//                }
-//            }
-//        }
-//    });
-//}
-function resource_Name() {
-    fs.readFile('sumit.sh', 'utf8', function (err, ResourceList) {
-        if (err) {
-            return console.log(err);
+var run_cmd=function(cmd, args, callBack ) {
+    var spawn = require('child_process').spawn;
+    var child = spawn(cmd, args);
+    var resp = "";
+    var resourceIDArray = [];
+
+    child.stdout.on('data', function (buffer) {
+        resp += buffer.toString()
+    });
+    child.stdout.on('end', function(error) {
+        var lines=resp.split('\n');
+        for(var resourceID in lines) {
+            resourceIDArray.push(lines[resourceID]);
         }
-        resourceName = ResourceList;
+        callBack (resourceIDArray);
     });
 }
+function resource_Name(){
+    run_cmd("./sumit.sh", [], function (resourceIDArray) {
+        for (var resourceID in resourceIDArray) {
+            var dataSplit = resourceIDArray[resourceID].split('\n');
+            if(dataSplit[0]) {
+                resourceName[dataSplit[0].split(" ")[0]] = dataSplit[0].split(" ")[1];
+                if (dataSplit[config.RESOURCE_ID] === '') {
+                    return;
+                }
+            }
+        }
+    });
+}
+//function resource_Name() {
+//    fs.readFile('sumit.sh', 'utf8', function (err, ResourceList) {
+//        if (err) {
+//            return console.log(err);
+//        }
+//        resourceName = ResourceList;
+//    });
+//}
 //function updateResourceData () {
 //    console.log('UpdateResourceData invoked');
 //    run_cmd("/Users/kadyan/nova.sh", [], function (resourceIDArray) {
