@@ -2,23 +2,55 @@ var resourceListOptions, resourceData, testData, testOptions, serverData, server
 
 var shouter = new ko.subscribable();
 
-var d3Model =  function() {
-    this.cpu = ko.observable("NA");
-    this.cpuUtilData = ko.observable("NA");
-    shouter.subscribe(function(newValue) {
-        console.log('D3 Model Refreshed');
-        this.cpu(Math.random() * 100);
-        this.cpuUtilData(Math.random() * 100);
-    }, this, "messageToPublish");
-};
 
+var d3Model =  function() {
+    self=this
+    self.cpu = ko.observable("NA");
+    self.cpuUtilData = ko.observable("NA");
+    // Main Model
+    //function updateServerdata(serverSpecificData){
+    //    self.cpu = serverSpecificData.cpuData
+    //    self.cpu_util = serverSpecificData.cpu_Util;
+    //    self.diskephemeralsize = serverSpecificData.diskephemeralSize;
+    //    self.diskreadbyte = serverSpecificData.diskreadBytes;
+    //    self.diskrootsize = serverSpecificData.diskrootSize;
+    //    self.diskwritebytes = serverSpecificData.diskwriteBytes;
+    //    self.diskwriterequests = serverSpecificData.diskwriteRequests;
+    //    self.instance = serverSpecificData.instance;
+    //    self.memory = serverSpecificData.Memory;
+    //    self.vcpus = serverSpecificData.vcpus;
+    //    self.networkincomingbytes = serverSpecificData.networkincomingBytes;
+    //    self.networkoutgoingbytes = serverSpecificData.networkoutgoingBytes;
+    //}
+    shouter.subscribe(function(serverName) {
+
+        //API call to get fresh server data....
+        $.ajax({
+            type: 'GET',
+            data: serverName,
+            contentType: "application/json",
+            //contentType: "application/x-www-form-urlencoded",
+            dataType:'json',
+            url:"http://localhost:3000/resourceNameInverse",
+            success: function(data) {
+                //updateServerdata(data);
+                console.log(data);
+            },
+            error: function(error) {
+                console.log("some error in fetching the notifications");
+            }
+        });
+        console.log('D3 Model Refreshed');
+        self.cpu(Math.random() * 100);
+        self.cpuUtilData(Math.random() * 100);
+    }, self, "messageToPublish");
+};
 var serverDataModel = function () {
     this.message = ko.observable("This represents the server data.....");
     shouter.subscribe(function(newValue) {
         this.message(newValue);
     }, this, "messageToPublish");
 };
-
 var resourceListModel = function(resourceList) {
     resourceListOptions = ko.observableArray();
     var resourceListArray = Object.keys(resourceList).map(function (key) {return resourceList[key]});
