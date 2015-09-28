@@ -39,7 +39,9 @@
         <!--<p>Cpu_UTLIZATION: <span data-bind="text: CPU"></span></p>-->
     <!--</div>-->
 
-<select data-bind="options: resourceListOptions, value: resourceData"></select>
+<div data-bind="with: resourceListModel">
+    <select data-bind="options: resourceListOptions, value: resourceData"></select>
+</div>
 
 <div data-bind="with: serverDataModel">
     <p data-bind="text:message">

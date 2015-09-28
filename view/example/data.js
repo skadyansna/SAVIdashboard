@@ -1,4 +1,3 @@
-var resourceListOptions, resourceData, testData, testOptions, serverData, serverDataModel, d3Model;
 
 var shouter = new ko.subscribable();
 
@@ -9,37 +8,28 @@ var d3Model =  function() {
         console.log('D3 Model Refreshed');
         this.cpu(Math.random() * 100);
         this.cpuUtilData(Math.random() * 100);
-    }, this, "messageToPublish");
+    }, this, "serverNameSelectionChange");
 };
 
 var serverDataModel = function () {
     this.message = ko.observable("This represents the server data.....");
     shouter.subscribe(function(newValue) {
         this.message(newValue);
-    }, this, "messageToPublish");
+    }, this, "serverNameSelectionChange");
 };
 
 var resourceListModel = function(resourceList) {
-    resourceListOptions = ko.observableArray();
+    this.resourceListOptions = ko.observableArray();
     var resourceListArray = Object.keys(resourceList).map(function (key) {return resourceList[key]});
     for(var resourceIndex in resourceListArray) {
-        resourceListOptions.push(resourceListArray[resourceIndex]);
+        this.resourceListOptions.push(resourceListArray[resourceIndex]);
     }
-    resourceData = ko.observable();
-    resourceData.subscribe(function(newValue) {
-        shouter.notifySubscribers(newValue, "messageToPublish");
+    this.resourceData = ko.observable();
+    this.resourceData.subscribe(function(newValue) {
+        shouter.notifySubscribers(newValue, "serverNameSelectionChange");
         console.log('newValue');
     });
 };
-
-/*var testModel = function(resourceList) {
-    testOptions = ko.observableArray();
-    var resourceListArray = Object.keys(resourceList).map(function (key) {return resourceList[key]});
-    for(var resourceIndex in resourceListArray) {
-        testOptions.push(resourceListArray[resourceIndex]);
-    }
-    testData = ko.observable();
-};*/
 
 var getResourceIDData = function (resourceName) {
     console.log('Selected Value ' + resourceName);
