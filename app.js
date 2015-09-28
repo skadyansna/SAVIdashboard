@@ -24,68 +24,75 @@
 
 app.use(express.static(__dirname+'/view'));
 
-var run_cmd=function(cmd, args, callBack ) {
-    var spawn = require('child_process').spawn;
-    var child = spawn(cmd, args);
-    var resp = "";
-    var resourceIDArray = [];
-
-    child.stdout.on('data', function (buffer) {
-        resp += buffer.toString()
-    });
-    child.stdout.on('end', function(error) {
-        var lines=resp.split('\n');
-        for(var resourceID in lines) {
-            resourceIDArray.push(lines[resourceID]);
+//var run_cmd=function(cmd, args, callBack ) {
+//    var spawn = require('child_process').spawn;
+//    var child = spawn(cmd, args);
+//    var resp = "";
+//    var resourceIDArray = [];
+//
+//    child.stdout.on('data', function (buffer) {
+//        resp += buffer.toString()
+//    });
+//    child.stdout.on('end', function(error) {
+//        var lines=resp.split('\n');
+//        for(var resourceID in lines) {
+//            resourceIDArray.push(lines[resourceID]);
+//        }
+//        callBack (resourceIDArray);
+//    });
+//}
+//function resource_Name(){
+//    run_cmd("sumit.sh", [], function (resourceIDArray) {
+//        for (var resourceID in resourceIDArray) {
+//            var dataSplit = resourceIDArray[resourceID].split('\n');
+//            if(dataSplit[0]) {
+//                resourceName[dataSplit[0].split(" ")[0]] = dataSplit[0].split(" ")[1] + '_' + dataSplit[0].split(" ")[0].split('-')[0];
+//                if (dataSplit[config.RESOURCE_ID] === '') {
+//                    return;
+//                }
+//            }
+//        }
+//    });
+//}
+function resource_Name() {
+    fs.readFile('sumit.sh', 'utf8', function (err, ResourceList) {
+        if (err) {
+            return console.log(err);
         }
-        callBack (resourceIDArray);
+        resourceName = ResourceList;
     });
 }
-function resource_Name(){
-    run_cmd("/Users/kadyan/resourcename.sh", [], function (resourceIDArray) {
-        for (var resourceID in resourceIDArray) {
-            var dataSplit = resourceIDArray[resourceID].split('\n');
-            if(dataSplit[0]) {
-                resourceName[dataSplit[0].split(" ")[0]] = dataSplit[0].split(" ")[1] + '_' + dataSplit[0].split(" ")[0].split('-')[0];
-                if (dataSplit[config.RESOURCE_ID] === '') {
-                    return;
-                }
-            }
-        }
-    });
-}
-
-function updateResourceData () {
-    console.log('UpdateResourceData invoked');
-    run_cmd("/Users/kadyan/nova.sh", [], function (resourceIDArray) {
-        for (var resourceID in resourceIDArray) {
-            //remove the for loop and then try to run each resource with grabbing one resource_id
-            //WRITE SHELL  SCRIPT FOR EACH COMMAND
-            runCmdWithArguments("/Users/kadyan/sumit.sh", [resourceIDArray[resourceID]], function (resourceIdData) {
-                var dataSplit = resourceIdData.split('\n');
-                if (dataSplit[config.RESOURCE_ID] === '') {
-                    return;
-                }
-                resourceIdData = resourceIdData.replace(/(\r\n|\n|\r)/gm, "");
-                if (dataSplit) {
-                    serverData[dataSplit[config.RESOURCE_ID]] = {
-                        cpuData: dataSplit[config.CPU],
-                        cpu_Util: dataSplit[config.CPU_UTIL],
-                        diskephemeralSize:dataSplit[config.DISKEPHEMERALSIZE],
-                        diskrootSize:dataSplit[config.DISKROOTSIZE],
-                        diskwriteBytes:dataSplit[config.DISKWRITEBYTES],
-                        diskwriteRequests:dataSplit[config.DISKWRITEREQUESTS],
-                        instance:dataSplit[config.INSTANCE],
-                        memory:dataSplit[config.MEMORY],
-                        vcpus:dataSplit[config.VCPUS],
-                        networkincomingBytes:dataSplit[config.NETWORKINCOMINGBYTES],
-                        networkoutgoingBytes:dataSplit[config.NETWORKOUTGOINGBYTES]
-                    };
-                }
-            });
-        };
-    });
-}
+//function updateResourceData () {
+//    console.log('UpdateResourceData invoked');
+//    run_cmd("/Users/kadyan/nova.sh", [], function (resourceIDArray) {
+//        for (var resourceID in resourceIDArray) {
+//            //remove the for loop and then try to run each resource with grabbing one resource_id
+//            //WRITE SHELL  SCRIPT FOR EACH COMMAND
+//            runCmdWithArguments("/Users/kadyan/sumit.sh", [resourceIDArray[resourceID]], function (resourceIdData) {
+//                var dataSplit = resourceIdData.split('\n');
+//                if (dataSplit[config.RESOURCE_ID] === '') {
+//                    return;
+//                }
+//                resourceIdData = resourceIdData.replace(/(\r\n|\n|\r)/gm, "");
+//                if (dataSplit) {
+//                    serverData[dataSplit[config.RESOURCE_ID]] = {
+//                        cpuData: dataSplit[config.CPU],
+//                        cpu_Util: dataSplit[config.CPU_UTIL],
+//                        diskephemeralSize:dataSplit[config.DISKEPHEMERALSIZE],
+//                        diskrootSize:dataSplit[config.DISKROOTSIZE],
+//                        diskwriteBytes:dataSplit[config.DISKWRITEBYTES],
+//                        diskwriteRequests:dataSplit[config.DISKWRITEREQUESTS],
+//                        instance:dataSplit[config.INSTANCE],
+//                        memory:dataSplit[config.MEMORY],
+//                        vcpus:dataSplit[config.VCPUS],
+//                        networkincomingBytes:dataSplit[config.NETWORKINCOMINGBYTES],
+//                        networkoutgoingBytes:dataSplit[config.NETWORKOUTGOINGBYTES]
+//                    };
+//                }
+//            });
+//        };
+//    });
+//}
 var runCmdWithArguments=function(cmd, args, callBack ) {
     var spawn = require('child_process').spawn;
     var child = spawn(cmd, args);
@@ -114,15 +121,15 @@ app.get('/getServers', function(req, res) {
         console.log(text)
     });
 });
-var cron = require('cron');
-var cronJob = cron.job("0 */1 * * * *", function(){
-    // perform operation
-    updateResourceData()
-});
-
-cronJob.start();
-updateResourceData();
+//var cron = require('cron');
+//var cronJob = cron.job("0 */1 * * * *", function(){
+//    // perform operation
+//    updateResourceData()
+//});
 resource_Name();
+//cronJob.start();
+//updateResourceData();
+
 server.listen(3000);
 console.log("server is listening on port 3000");
 
