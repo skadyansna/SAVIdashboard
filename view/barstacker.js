@@ -1,3 +1,5 @@
+var stacker4;
+
 function barstacker(data) {
     var settings4 = barStackerDefaultSettings();
     settings4.barThickness = 1;
@@ -8,8 +10,12 @@ function barstacker(data) {
     settings4.color = "#0066FF";
     settings4.cornerRoundingX = 5;
     settings4.cornerRoundingY = 5;
-    var cpu_value = Math.round(data.cpuData);
-    var stacker4 = loadBarStacker("stacker4", "Instances", cpu_value, settings4);
+    var cpu_value = Math.round(data.Instance);
+    if(!stacker4) {
+        stacker4 = loadBarStacker("stacker4", "Instances", cpu_value, settings4);
+    } else {
+        stacker4.update(cpu_value);
+    }
     //var settings5 = barStackerDefaultSettings();
     //settings5.vertical = false;
     //settings5.valuePrefix = "";
