@@ -1,4 +1,4 @@
-var stacker4;
+var stacker4, stacker5;
 
 function barstacker(data) {
     var settings4 = barStackerDefaultSettings();
@@ -16,14 +16,18 @@ function barstacker(data) {
     } else {
         stacker4.update(cpu_value);
     }
-    //var settings5 = barStackerDefaultSettings();
-    //settings5.vertical = false;
-    //settings5.valuePrefix = "";
-    //settings5.maxValue = "1000"
-    //settings5.valuePostfix = "mb"
-    //settings5.color = "#FFFFFF";
-    //var memory_value = Math.round(data.Memory);
-    //var stacker5 = loadBarStacker("stacker5", "CPU_Time", memory_value, settings5);
+    var settings5 = barStackerDefaultSettings();
+    settings5.vertical = false;
+    settings5.valuePrefix = "";
+    settings5.maxValue = "1000";
+    settings5.valuePostfix = "mb";
+    settings5.color = "#FFFFFF";
+    var memory_value = Math.round(data.Memory);
+    if(!stacker5){
+        stacker5 = loadBarStacker("stacker5", "CPU_Time", memory_value, settings5);
+    } else {
+        stacker5.update(memory_value);
+    }
 }
 
     function barStackerDefaultSettings() {
