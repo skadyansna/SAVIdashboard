@@ -7,21 +7,32 @@ var d3Model =  function() {
     var self = this;
     self.cpu = ko.observable("NA");
     self.cpuUtilData = ko.observable("NA");
+    self.diskephemeralsize=ko.observable("NA");
+    self.diskreadbyte=ko.observable("NA");
+    self.diskrootsize=ko.observable("NA");
+    self.diskwritebytes=ko.observable("NA");
+    self.diskwriterequests=ko.observable("NA");
+    self.instance=ko.observable("NA");
+    self.memory=ko.observable("NA");
+    self.vcpus=ko.observable("NA");
+    self.networkincomingbytes=ko.observable("NA");
+    self.networkoutgoingbytes=ko.observable("NA");
     // Main Model
     function updateServerdata(serverSpecificData){
         self.cpu(serverSpecificData.cpuData);
         self.cpuUtilData(serverSpecificData.cpu_Util);
-        self.diskephemeralsize = serverSpecificData.diskephemeralSize;
-        self.diskreadbyte = serverSpecificData.diskreadBytes;
-        self.diskrootsize = serverSpecificData.diskrootSize;
-        self.diskwritebytes = serverSpecificData.diskwriteBytes;
-        self.diskwriterequests = serverSpecificData.diskwriteRequests;
-        self.instance = serverSpecificData.instance;
-        self.memory = serverSpecificData.Memory;
-        self.vcpus = serverSpecificData.vcpus;
-        self.networkincomingbytes = serverSpecificData.networkincomingBytes;
-        self.networkoutgoingbytes = serverSpecificData.networkoutgoingBytes;
+        self.diskephemeralsize(serverSpecificData.diskephemeralSize);
+        self.diskreadbyte(serverSpecificData.diskreadBytes);
+        self.diskrootsize(serverSpecificData.diskrootSize);
+        self.diskwritebytes(serverSpecificData.diskwriteBytes);
+        self.diskwriterequests(serverSpecificData.diskwriteRequests);
+        self.instance(serverSpecificData.Instance);
+        self.memory(serverSpecificData.Memory);
+        self.vcpus(serverSpecificData.Vcpus);
+        self.networkincomingbytes(serverSpecificData.networkincomingBytes);
+        self.networkoutgoingbytes(serverSpecificData.networkoutgoingBytes);
     }
+
     shouter.subscribe(function(serverName) {
         $.ajax({
             type: 'GET',
@@ -31,6 +42,8 @@ var d3Model =  function() {
             url:"http://localhost:3000/resourceNameInverse",
             success: function(data) {
                 updateServerdata(data);
+                canvas(data);
+                barstacker(data);
                 console.log(data);
             },
             error: function(error) {

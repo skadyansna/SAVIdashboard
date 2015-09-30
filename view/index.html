@@ -13,7 +13,7 @@
 <div id="container">
     <div class="gridster">
         <ul>
-            <!--showing plain test value late something can be done -->
+            <!--showing plain test value late something can be done-->
             <li data-row="1" data-col="1" data-sizex="2" data-sizey="1" class="gs-w" >
                 <div data-id="cpu" data-view="Text" data-title="Hello" data-text="This is your shiny new dashboard." data-moreinfo="Protip: You can drag the widgets around!" class="widget widget-text" >
                     <div align="center" style="width: 500px; padding-top:5%;">
@@ -23,16 +23,14 @@
                     <h1>MEMORY</h1>
                 </div>
             </li>
-
-
-            <!--showing the cpu utilization will show a static meter filling up -->
+            <!--&lt;!&ndash;showing the cpu utilization will show a static meter filling up &ndash;&gt;-->
             <li data-row="1" data-col="1" data-sizex="1" data-sizey="1" class="gs-w">
-                <div data-id="synergy" data-view="Meter" data-title="Synergy"   class="widget widget-meter">
+                <div data-id="synergy" data-bind="with: d3Model" data-view="Meter" data-title="Synergy"   class="widget widget-meter">
                     <!--Note that because of the padding on the heading tags  h1,h2,h3,h4,h5 the widgets can shift so keep that in mind-->
                     <canvas id="myCanvas" height="200" width="200">
                     </canvas>
-                    <!--<input class="meter" data-angleoffset="-125" data-anglearc="250" data-width="200" readonly="readonly"-->
-                           <!--data-bind="value:cpu_util" data-min="0" data-max="100" >-->
+                    <input class="meter" data-angleoffset="-125" data-anglearc="250" data-width="200" readonly="readonly"
+                           data-bind="value:cpuUtilData" data-min="0" data-max="100" >
                     <h3>CPU_UTILIZATION</h3>
                 </div>
             </li>
@@ -46,126 +44,76 @@
                         </div>
                     </div></br>
                     <!-- Single button -->
-                    <div class="btn-group ">
-                        <button type="button" class="btn-lg dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Action <span class="caret"></span>
-                        </button>
-                        <!--<ul class="dropdown-menu">-->
-                            <!--<li><a href="#">Resource_id 1</a></li>-->
-                            <!-- -->
-                        <!--</ul>-->
+                    <!--<div class="btn-group ">-->
+                        <!--<button type="button" class="btn-lg dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+                            <!--Action <span class="caret"></span>-->
+                        <!--</button>-->
+                        <!--&lt;!&ndash;<ul class="dropdown-menu">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<li><a href="#">Resource_id 1</a></li>&ndash;&gt;-->
+                            <!--&lt;!&ndash; &ndash;&gt;-->
+                        <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+                    <!--</div>-->
+                    <div class="selection" data-bind="with: resourceListModel">
+                        <select data-bind="options: resourceListOptions, value: resourceData" ></select>
                     </div>
-                    </br>
-                    </br>
                     </br>
                     <div class="row">
                         <div class=" col-sm-12">
                         <div class="col-sm-6">
                         <ul>
-                            <li>
-                                <span>CPU_TIME:</span>
-
-                            </li>
-                            <li>
-                                <span>CPU_UTIL:</span>
-
-                            </li>
-                            <li>
-                                <span>DSKELSIZE:</span>
-
-                            </li>
-                            <li>
-                                <span>DSKRDBYTE:</span>
-
-                            </li>
-                            <li>
-                                <span>DSKWTSIZE:</span>
-
-                            </li>
-                            <li>
-                                <span>DSKWTBYTE:</span>
-
-                            </li>
-                            <li>
-                                <span>DISKREQS:</span>
-
-                            </li>
-                            <li>
-                                <span>INSTANCE:</span>
-
-                            </li>
-                            <li>
-                                <span>MEMORY:</span>
-
-                            </li>
-                            <li>
-                                <span> VCPUS:</span>
-
-                            </li>
-
+                            <li><span>CPU_TIME:</span></li>
+                            <li><span>CPU_UTIL:</span></li>
+                            <li><span>DSKELSIZE:</span></li>
+                            <li><span>DSKRDBYTE:</span></li>
+                            <li><span>DSKWTSIZE:</span></li>
+                            <li><span>DSKWTBYTE:</span></li>
+                            <li><span>DISKREQS:</span></li>
+                            <li><span>INSTANCE:</span></li>
+                            <li><span>MEMORY:</span></li>
+                            <li><span> VCPUS:</span></li>
+                            <li><span>NTINCNGGBYTE</span></li>
+                            <li><span>NTOUTGNGGBYTE</span></li>
                         </ul>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-4" data-bind="with: d3Model">
                             <ul>
-                                <li>
-                            <span style="text-align:center;" class="title"  data-bind="text:cpu"></span>
-                                </li>
-                                <li>
-                                    <span style="text-align:center;" class="title"  data-bind="text:cpu_util"></span>
-                                </li>
-                                <li>
-                                    <span style="text-align:center;" class="title"  data-bind="text:diskephemeralsize"></span>
-                                </li>
-                                <li>
-                                    <span style="text-align:center;" class="title"  data-bind="text:diskreadbyte"></span>
-                                </li>
-
-                                <li>
-                                    <span style="text-align:center;" class="title"  data-bind="text:diskrootsize"></span>
-                                </li>
-
-                                <li>
-                                    <span style="text-align:center;" class="title"  data-bind="text:diskwritebytes"></span>
-                                </li>
-
-                                <li>
-                                    <span style="text-align:center;" class="title"  data-bind="text:diskwriterequests"></span>
-                                </li>
-
-                                <li>
-                                    <span style="text-align:center;" class="title"  data-bind="text:instance"></span>
-                                </li>
-                                <li>
-                                    <span style="text-align:center;" class="title"  data-bind="text:memory"></span>
-                                </li>
-                                <li>
-                                    <span style="text-align:center;" class="title"  data-bind="text:vcpus"></span>
-                                </li>
-
+                                <li><span style="text-align:center;" class="title"  data-bind="text:cpu"></span></li>
+                                <li><span style="text-align:center;" class="title"  data-bind="text:cpuUtilData"></span></li>
+                                <li><span style="text-align:center;" class="title"  data-bind="text:diskephemeralsize"></span></li>
+                                <li><span style="text-align:center;" class="title"  data-bind="text:diskreadbyte"></span></li>
+                                <li><span style="text-align:center;" class="title"  data-bind="text:diskrootsize"></span></li>
+                                <li><span style="text-align:center;" class="title"  data-bind="text:diskwritebytes"></span></li>
+                                <li><span style="text-align:center;" class="title"  data-bind="text:diskwriterequests"></span></li>
+                                <li><span style="text-align:center;" class="title"  data-bind="text:instance"></span></li>
+                                <li><span style="text-align:center;" class="title"  data-bind="text:memory"></span></li>
+                                <li><span style="text-align:center;" class="title"  data-bind="text:vcpus"></span></li>
+                                <li><span style="text-align:center;" class="title"  data-bind="text:networkincomingbytes"></span></li>
+                                <li><span style="text-align:center;" class="title"  data-bind="text:networkoutgoingbytes"></span></li>
                             </ul>
                         </div>
                     </div>
                     </div>
                 </div>
             </li>
-            <!--showing the numbers for memory usage -->
+            <!--showing the numbers for memory usage-->
             <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-                <div data-id="valuation" data-view="Number" data-title="Current Valuation" data-moreinfo="In billions" data-prefix="$" CLASS="widget widget-number" >
+                <div data-id="valuation" data-view="Number" data-bind="with: d3Model" data-title="Current Valuation" data-moreinfo="In billions" data-prefix="$" CLASS="widget widget-number" >
                     <svg id="stacker4" width="100" height="300" style="font-family: Helvetica; font-weight: bold;"
-                         onclick="stacker4.update((Math.random()*100));"></svg><br/>
+                         ></svg><br/>
                 </div>
             </li>
-            <!--showing Readbytes will display graph later on -->
-            <li data-row="1" data-col="1" data-sizex="2" data-sizey="1">
-                <div data-id="convergence" data-view="Graph" data-title="Convergence" style="background-color:#ff9618" class="widget widget-graph">
-                    <!--<svg id="fillgauge1" width="100%" height="250"  ></svg>-->
-                    <!--<h1>Memory_Used:<span class="title"  data-bind="text:memory"></span>%</h1>-->
-                    <svg id="fillgauge2" width="100%" height="250"></svg>
-                </div>
-            </li>
+            <!--&lt;!&ndash;showing Readbytes will display graph later on &ndash;&gt;-->
+            <!--<li data-row="1" data-col="1" data-sizex="2" data-sizey="1">-->
+                <!--<div data-id="convergence" data-view="Graph" data-title="Convergence" style="background-color:#ff9618" class="widget widget-graph">-->
+                    <!--&lt;!&ndash;<svg id="fillgauge1" width="100%" height="250"  ></svg>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<h1>Memory_Used:<span class="title"  data-bind="text:memory"></span>%</h1>&ndash;&gt;-->
+                    <!--<svg id="fillgauge2" width="100%" height="250"></svg>-->
+                <!--</div>-->
+            <!--</li>-->
         </ul>
     </div>
 </div>
+</body>
 <script type="text/javascript" src="http://gridster.net/assets/js/libs/jquery-1.7.2.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="http://gridster.net/dist/jquery.gridster.js" type="text/javascript" charset="utf-8"></script>
@@ -175,7 +123,10 @@
 <script src="Main.js"></script>
 <!--<script src="resourceList.js"></script>-->
 <script src="http://d3js.org/d3.v3.min.js" language="JavaScript"></script>
-<script src="liquidFillGauge.js" language="JavaScript"></script>
+<script src="canvas.js" language="JavaScript"></script>
+<script src="./example/data.js" language="JavaScript"></script>
+
+<!--<script src="liquidFillGauge.js" language="JavaScript"></script>-->
 <script src="barstacker.js" language="JavaScript"></script>
-</body>
+<!--</body>-->
 </html>

@@ -67,17 +67,17 @@ function updateResourceData () {
 
             if (dataSplit[0]) {
                 serverData[dataSplit[0].split(" ")[0]]= {
-                    cpuData: (Math.random() * 100),
-                    cpu_Util: (Math.random() * 100),
-                    diskephemeralSize:(Math.random() * 100),
-                    diskrootSize:(Math.random() * 100),
-                    diskwriteBytes:(Math.random() * 100),
-                    diskwriteRequests:(Math.random() * 100),
-                    instance:(Math.random() * 100),
-                    memory:(Math.random() * 100),
-                    vcpus:(Math.random() * 100),
-                    networkincomingBytes:(Math.random() * 100),
-                    networkoutgoingBytes:(Math.random() * 100)
+                    cpuData: parseFloat((Math.random() * 100)).toFixed(3),
+                    cpu_Util: parseFloat(Math.random() * 100).toFixed(3),
+                    diskephemeralSize:parseFloat(Math.random() * 100).toFixed(3),
+                    diskrootSize:parseFloat(Math.random() * 100).toFixed(3),
+                    diskwriteBytes:parseFloat(Math.random() * 100).toFixed(3),
+                    diskwriteRequests:parseFloat(Math.random() * 100).toFixed(3),
+                    Instance:parseFloat(Math.random() * 100).toFixed(3),
+                    Memory:parseFloat(Math.random() * 100).toFixed(3),
+                    Vcpus:parseFloat(Math.random() * 100).toFixed(3),
+                    networkincomingBytes:parseFloat(Math.random() * 100).toFixed(3),
+                    networkoutgoingBytes:parseFloat(Math.random() * 100).toFixed(3)
                 };
                 if (dataSplit[config.RESOURCE_ID] === '') {
                     return;
