@@ -2,7 +2,7 @@
  * Created by kadyan on 15-09-29.
  */
 function canvas(serverSpecificData) {
-    var cpu_utilization=Math.round(serverSpecificData.cpu_Util)/100;
+    var cpu_utilization=[Math.round(serverSpecificData.cpu_Util)]/100;
     //var cpu_utilization = 45 / 100;
     var canvas = document.getElementById('myCanvas');
     var context = canvas.getContext('2d');

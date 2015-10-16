@@ -6,7 +6,7 @@ function barstacker(data) {
     settings4.barBoxPadding = 12;
     settings4.barPadding = 1;
     settings4.textPx = 30;
-    settings4.maxValue = 110;
+    settings4.maxValue = 100;
     settings4.color = "#0066FF";
     settings4.cornerRoundingX = 5;
     settings4.cornerRoundingY = 5;
@@ -24,7 +24,7 @@ function barstacker(data) {
     settings5.color = "#FFFFFF";
     var memory_value = Math.round(data.Memory);
     if(!stacker5){
-        stacker5 = loadBarStacker("stacker5", "CPU_Time", memory_value, settings5);
+        stacker5 = loadBarStacker("stacker5", "Memory", memory_value, settings5);
     } else {
         stacker5.update(memory_value);
     }

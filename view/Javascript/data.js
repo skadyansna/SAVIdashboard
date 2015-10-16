@@ -5,30 +5,30 @@ var shouter = new ko.subscribable();
 
 var d3Model =  function() {
     var self = this;
-    self.cpu = ko.observable("NA");
+    self.cputime = ko.observable("NA");
     self.cpuUtilData = ko.observable("NA");
     self.diskephemeralsize=ko.observable("NA");
     self.diskreadbyte=ko.observable("NA");
     self.diskrootsize=ko.observable("NA");
     self.diskwritebytes=ko.observable("NA");
     self.diskwriterequests=ko.observable("NA");
-    self.instance=ko.observable("NA");
     self.memory=ko.observable("NA");
+    self.instance=ko.observable("NA");
     self.vcpus=ko.observable("NA");
     self.networkincomingbytes=ko.observable("NA");
     self.networkoutgoingbytes=ko.observable("NA");
     // Main Model
     function updateServerdata(serverSpecificData){
-        self.cpu(serverSpecificData.cpuData);
-        self.cpuUtilData(serverSpecificData.cpu_Util);
+        self.cputime(serverSpecificData.cpuTime);
+        self.cpuUtilData(Math.round(serverSpecificData.cpu_Util));
         self.diskephemeralsize(serverSpecificData.diskephemeralSize);
-        self.diskreadbyte(serverSpecificData.diskreadBytes);
+        self.diskreadbyte(serverSpecificData.diskreadbyte);
         self.diskrootsize(serverSpecificData.diskrootSize);
         self.diskwritebytes(serverSpecificData.diskwriteBytes);
         self.diskwriterequests(serverSpecificData.diskwriteRequests);
-        self.instance(serverSpecificData.Instance);
+        self.instance(Math.round(serverSpecificData.Instance));
         self.memory(serverSpecificData.Memory);
-        self.vcpus(serverSpecificData.Vcpus);
+        self.vcpus(Math.round(serverSpecificData.Vcpus));
         self.networkincomingbytes(serverSpecificData.networkincomingBytes);
         self.networkoutgoingbytes(serverSpecificData.networkoutgoingBytes);
     }
@@ -44,6 +44,7 @@ var d3Model =  function() {
                 updateServerdata(data);
                 canvas(data);
                 barstacker(data);
+                liquidFillGauge(data);
                 console.log(data);
             },
             error: function(error) {
@@ -71,15 +72,12 @@ var resourceListModel = function(resourceList) {
         console.log('newValue');
     });
 };
-
 var getResourceIDData = function (resourceName) {
     console.log('Selected Value ' + resourceName);
 };
-
 $.get('/resource', function(data) {
     ko.applyBindings(new masterVM(data));
 });
-
 var masterVM = function(data) {
     resourceListModel =  new resourceListModel(data);
     serverDataModel = new serverDataModel();

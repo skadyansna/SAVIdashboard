@@ -1,22 +1,22 @@
-<html>
-    <head lang="en">
+<!DOCTYPE html>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
-    <title></title>
-    <script src="http://d3js.org/d3.v3.min.js" language="JavaScript"></script>
-    <script src="../barstacker.js" language="JavaScript"></script>
-    </head>
-    <body>
-<div align="center" style="width: 600px;">
-    <svg id="stacker5" width="560" height="100" style="font-family: Helvetica;
-    font-weight: bold;" onclick="stacker5.update((Math.random()*100));"></svg>
+    <title>D3 Graphic</title>
+    <link rel="stylesheet" href="base.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <h2>D3 Graphic</h2>
+    <div id="chart">
+
+    </div>
+
 </div>
-    <script language="JavaScript">
-    var settings5 = barStackerDefaultSettings();
-    settings5.vertical = false;
-    settings5.valuePrefix = "";
-    settings5.valuePostfix="s"
-    settings5.color = "#337733";
-    var stacker5 = loadBarStacker("stacker5", "CPU_Time", 30, settings5);
-    </script>
-    </body>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="http://d3js.org/d3.v3.min.js" language="JavaScript"></script>
+<script src="script.js"></script>
+</body>
 </html>

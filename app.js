@@ -67,9 +67,10 @@ function updateResourceData () {
 
             if (dataSplit[0]) {
                 serverData[dataSplit[0].split(" ")[0]]= {
-                    cpuData: parseFloat((Math.random() * 100)).toFixed(3),
+                    cpuTime: parseFloat((Math.random() * 100)).toFixed(3),
                     cpu_Util: parseFloat(Math.random() * 100).toFixed(3),
                     diskephemeralSize:parseFloat(Math.random() * 100).toFixed(3),
+                    diskreadbyte:parseFloat(Math.random() * 100).toFixed(3),
                     diskrootSize:parseFloat(Math.random() * 100).toFixed(3),
                     diskwriteBytes:parseFloat(Math.random() * 100).toFixed(3),
                     diskwriteRequests:parseFloat(Math.random() * 100).toFixed(3),
@@ -107,6 +108,7 @@ app.get('/serverdata/:id', function(req, res) {
     res.json(serverData[req.params.id]);
 });
 app.get('/resource',function(req,res){
+    console.log(resourceName)
     res.json(resourceName);
 });
 app.get('/resourceNameInverse',function(req,res){
@@ -117,6 +119,7 @@ app.get('/resourceNameInverse',function(req,res){
     var ResourceID=resourceNameInverse[resourceName];
     var serverSpecificData=serverData[ResourceID];
     res.send(serverSpecificData);
+    console.log(serverSpecificData);
     //res.json(resourceNameInverse);
 });
 app.get('/getServers', function(req, res) {
