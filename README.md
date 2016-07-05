@@ -4,9 +4,10 @@ Step 1
 # download Node.js https://nodejs.org/en/download/
 
 Step 2
-# install npm for node 
+# install NPM for node 
 Step 3
-# using the nova list command fetch all the resource id 
+
+# Now put the nova.sh and sumit.sh on your local machine and also verify that the files are running 
 Step 4 
 # using the terminal run the authentication file and then the shell script sumit.sh 
 Step 5
