@@ -6,7 +6,7 @@ Step 1
 Step 2
 # install npm for node 
 Step 3 
-# using the terminal run the shell script and also the authentication file 
+# using the terminal run the authentication file and then the shell script sumit.sh 
 Step 4
 # Then spin up the local server using node.js 
 Step 5
