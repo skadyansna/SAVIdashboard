@@ -2,14 +2,12 @@
 Savi dashboard for server monitoring
 Step 1
 # download Node.js https://nodejs.org/en/download/
-
 Step 2
 # install NPM for node 
 Step 3
-
-# Now put the nova.sh and sumit.sh on your local machine and also verify that the files are running 
+# Now modify the nova.sh with your SAVI username and password.After uploading the nova.sh.Upload nova.sh and sumit.sh in you local path.
 Step 4 
-# using the terminal run the authentication file and then the shell script sumit.sh 
+# Then update the app.js file to your local file path for both the shell script.
 Step 5
 # Then spin up the local server using node.js 
 Step 6
