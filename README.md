@@ -3,7 +3,7 @@ Savi dashboard for server monitoring
 Step 1
 # download Node.js https://nodejs.org/en/download/
 Step 2
-# install NPM for node 
+# install NPM for node and use the package.json to install all the packages 
 Step 3
 # Now modify the nova.sh with your SAVI username and password.After uploading the nova.sh.Upload nova.sh and sumit.sh in you local path.
 Step 4 
