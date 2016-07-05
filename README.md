@@ -6,4 +6,10 @@ Step 1
 Step 2
 # install npm for node 
 Step 3 
-# usin
+# using the terminal run the shell script and also the authentication file 
+Step 4
+# Then spin up the local server using node.js 
+Step 5
+# open the Browser on the port number listed in the node.js file and you will see the tenant information for uvic Edge 
+
+
