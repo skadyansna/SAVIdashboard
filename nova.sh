@@ -1,5 +1,5 @@
-export OS_USERNAME=skadyan
-export OS_PASSWORD=sna
+export OS_USERNAME=*******
+export OS_PASSWORD=******
 export OS_REGION_NAME=EDGE-VC-1
 export OS_TENANT_NAME=uvic
 export OS_C=http://iam.savitestbed.ca:8777
